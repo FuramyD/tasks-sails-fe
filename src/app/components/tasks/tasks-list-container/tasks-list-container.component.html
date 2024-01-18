@@ -1,0 +1,36 @@
+<div class="tasks-list-container">
+    <div class="tasks-list-container__header">
+        <tui-icon class="icon--extra-large" [icon]="icon"></tui-icon>
+        <h3 class="tasks-list-container__header">{{ heading }}</h3>
+    </div>
+    <div class="tasks-list"
+         cdkDropList
+         [cdkDropListData]="_tasks"
+         (cdkDropListEntered)="onItemEntered()"
+         (cdkDropListExited)="onItemExited()"
+         (cdkDropListDropped)="onItemDrop($event)"
+    >
+        @if (!isEmptyContainerHidden) {
+            <div class="tasks-list__empty">
+                There are no tasks yet.
+            </div>
+        }
+        @for (task of _tasks; track task) {
+            <app-tasks-item
+                    [task]="task"
+                    (updateTask)="updateTask.emit(task)"
+
+                    cdkDrag
+                    [cdkDragData]="task"
+                    (cdkDragStarted)="setDraggingObject(task)"
+                    (cdkDragEnded)="setDraggingObject(null)"
+            >
+                <div class="tasks-list__item--placeholder" *cdkDragPlaceholder>
+                    <app-tasks-item [task]="task" [dragging]="task === draggingObject"></app-tasks-item>
+                </div>
+
+            </app-tasks-item>
+        }
+
+    </div>
+</div>

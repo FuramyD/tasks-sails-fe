@@ -1,0 +1,39 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+:host {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.tui-form {
+    &__header {
+        text-align: center;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        a {
+            font: var(--tui-font-text-m);
+        }
+
+        @media(@tui-mobile-interval) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}
+
+.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    height: 100%;
+    max-height: 100dvh;
+    overflow: auto;
+}

@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/cdk/overlay-prebuilt.css';
+
+@icon-size-s: 16px;
+@icon-size-m: 24px;
+@icon-size-l: 32px;
+@icon-size-xl: 40px;
+
+html {
+    overflow: hidden;
+}
+
+/* Animate items as they're being sorted. */
+.cdk-drop-list-dragging .cdk-drag {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Animate an item that has been dropped. */
+.cdk-drag-animating {
+    transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.icon--small {
+    min-width: @icon-size-s;
+    min-height: @icon-size-s;
+    max-width: @icon-size-s;
+    max-height: @icon-size-s;
+    overflow: hidden;
+}
+
+.icon--medium {
+    min-width: @icon-size-m;
+    min-height: @icon-size-m;
+    max-width: @icon-size-m;
+    max-height: @icon-size-m;
+    overflow: hidden;
+}
+
+.icon--large {
+    min-width: @icon-size-l;
+    min-height: @icon-size-l;
+    max-width: @icon-size-l;
+    max-height: @icon-size-l;
+    overflow: hidden;
+}
+
+.icon--extra-large {
+    min-width: @icon-size-xl;
+    min-height: @icon-size-xl;
+    max-width: @icon-size-xl;
+    max-height: @icon-size-xl;
+    overflow: hidden;
+}

@@ -1,0 +1,17 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    .app-root {
+        height: 100%;
+        --tui-duration: 300ms;
+    }
+
+    tui-scrollbar {
+        height: 100%;
+        ::ng-deep .t-content {
+            height: 100%;
+        }
+    }
+}

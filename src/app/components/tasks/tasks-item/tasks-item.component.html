@@ -1,0 +1,37 @@
+<div class="task-item">
+    <div class="task-item__header">
+        <h4 class="task-item__header-title">{{ task.title }}</h4>
+        <button
+            type="button"
+            tuiIconButton
+            appearance="flat"
+            size="m"
+            [icon]="editIcon"
+            (click)="updateTask.emit()"
+        ></button>
+    </div>
+    <div class="task-item__content line-clamp-box" #parent>
+        <tui-line-clamp
+            class="line-clamp"
+            [content]="description"
+            [lineHeight]="getDynamicLineHeight(parent)"
+            [linesLimit]="getDynamicLineLimit(parent)"
+        ></tui-line-clamp>
+    </div>
+    <div class="task-item__footer">
+        <div class="task-item__footer-difficulty">
+            <app-task-difficulty [taskDifficulty]="task.difficulty"></app-task-difficulty>
+        </div>
+        <div class="task-item__footer-due-date" [class._expired]="isExpiredTask">
+            <tui-icon icon="tuiIconCalendar"></tui-icon>
+            <span>Due Date: {{ task.dueDate | date: 'dd.MM.yyyy HH:mm' }}</span>
+        </div>
+</div>
+
+<ng-template #editIcon>
+    <tui-icon icon="tuiIconEdit2"></tui-icon>
+</ng-template>
+
+<ng-template #description>
+    {{ task.description }}
+</ng-template>

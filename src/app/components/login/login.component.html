@@ -1,0 +1,40 @@
+<div class="login-page">
+    <div class="tui-container">
+        <form [formGroup]="loginForm" role="form">
+            <div class="tui-row tui-row_sme">
+                <div class="tui-col_12">
+                    <h3 class="tui-form__header tui-form__header_margin-top_none">Login</h3>
+                    <div class="tui-form__row">
+                        <tui-input formControlName="email">
+                            Email
+                            <input tuiTextfield name="email"/>
+                        </tui-input>
+                        <tui-error
+                            formControlName="email"
+                            [error]="[] | tuiFieldError | async"
+                        ></tui-error>
+                    </div>
+                    <div class="tui-form__row">
+                        <tui-input-password formControlName="password">Password</tui-input-password>
+                        <tui-error
+                            formControlName="password"
+                            [error]="['required'] | tuiFieldError | async"
+                        ></tui-error>
+                    </div>
+                </div>
+            </div>
+            <div class="tui-form__buttons">
+                <button
+                    size="l"
+                    tuiButton
+                    type="submit"
+                    class="tui-form__button"
+                    [disabled]="loginForm.invalid"
+                    [showLoader]="loading"
+                    (click)="login()"
+                >Login</button>
+                <a tuiLink routerLink="/registration">Don't have an account yet? Join us now!</a>
+            </div>
+        </form>
+    </div>
+</div>

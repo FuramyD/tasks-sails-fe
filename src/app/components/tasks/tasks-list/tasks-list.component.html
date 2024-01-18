@@ -1,0 +1,53 @@
+<div class="tasks-list__wrapper">
+    <div class="tasks-list__header">
+        <button tuiButton size="m" appearance="flat" (click)="openTaskFormPopup()">Create task</button>
+        <tui-input class="tasks-list__search" role="search" [formControl]="searchControl">
+            Search
+            <input type="text" role="searchbox" tuiTextfield>
+        </tui-input>
+    </div>
+    @if (loading$ | async) {
+        <tui-loader size="xxl"></tui-loader>
+    } @else {
+        <div class="tasks-list__containers" cdkDropListGroup>
+            <app-tasks-list-container
+                    heading="To-Do"
+                    icon="paper-tablet"
+                    [tasks]="(toDoTasks$ | async) ?? []"
+                    (updateTask)="openTaskFormPopup($event)"
+                    (taskDropped)="onChangeCompletedStateOfTask($event, false)"
+            ></app-tasks-list-container>
+            <app-tasks-list-container
+                    heading="Done"
+                    icon="completed-list"
+                    [tasks]="(doneTasks$ | async) ?? []"
+                    (updateTask)="openTaskFormPopup($event)"
+                    (taskDropped)="onChangeCompletedStateOfTask($event, true)"
+            ></app-tasks-list-container>
+        </div>
+    }
+
+</div>
+
+<ng-template #taskFormPopup
+                let-observer
+                [(tuiDialog)]="isTaskFormPopupOpened"
+                [tuiDialogOptions]="{
+                    dismissible: true,
+                    size: 's',
+                    label: editingTask ? 'Edit Task' : 'Create Task',
+                    closeable: true
+                }"
+>
+    <app-task-form
+        [task]="editingTask"
+        (submitForm)="editingTask ? onUpdateTask(editingTask, $event) : onCreateTask($event); observer.complete()"
+        (cancel)="observer.complete()"
+    ></app-task-form>
+</ng-template>
+
+<ng-template #test let-observer>
+    <button (click)="observer.complete()" tuiButton>Close popup</button>
+</ng-template>
+
+

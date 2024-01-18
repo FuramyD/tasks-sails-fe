@@ -1,0 +1,56 @@
+<div class="registration-page">
+    <div class="tui-container">
+        <form [formGroup]="registrationForm">
+            <div class="tui-row tui-row_sme">
+                <div class="tui-col_12">
+                    <h3 class="tui-form__header tui-form__header_margin-top_none">Registration</h3>
+                    <div class="tui-form__row">
+                        <tui-input [formControlName]="FormControls.USERNAME">
+                            Username
+                            <input tuiTextfield name="username" />
+                        </tui-input>
+                        <tui-error
+                                [formControlName]="FormControls.USERNAME"
+                                [error]="[] | tuiFieldError | async"
+                        ></tui-error>
+                    </div>
+                    <div class="tui-form__row">
+                        <tui-input [formControlName]="FormControls.EMAIL">
+                            Email
+                            <input tuiTextfield name="email" />
+                        </tui-input>
+                        <tui-error
+                            [formControlName]="FormControls.EMAIL"
+                            [error]="[] | tuiFieldError | async"
+                        ></tui-error>
+                    </div>
+                    <div class="tui-form__row">
+                        <tui-input-password [formControlName]="FormControls.PASSWORD">Password</tui-input-password>
+                        <tui-error
+                                [formControlName]="FormControls.PASSWORD"
+                                [error]="['required'] | tuiFieldError | async"
+                        ></tui-error>
+                    </div>
+                    <div class="tui-form__row">
+                        <tui-input-password [formControlName]="FormControls.CONFIRM_PASSWORD">Confirm Password</tui-input-password>
+                        <tui-error
+                                [formControlName]="FormControls.CONFIRM_PASSWORD"
+                                [error]="['required'] | tuiFieldError | async"
+                        ></tui-error>
+                    </div>
+                </div>
+            </div>
+            <div class="tui-form__buttons">
+                <button
+                        size="l"
+                        tuiButton
+                        type="submit"
+                        class="tui-form__button"
+                        [disabled]="registrationForm.invalid"
+                        [showLoader]="loading"
+                        (click)="register()"
+                >Register</button>
+            </div>
+        </form>
+    </div>
+</div>

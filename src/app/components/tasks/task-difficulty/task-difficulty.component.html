@@ -1,0 +1,8 @@
+<div class="task-difficulty">
+    <div class="task-difficulty-item"
+         *ngFor="let difficulty of difficulties"
+         [class.easy]="difficulty <= taskDifficulty && taskDifficulty === taskDifficulties.EASY"
+         [class.medium]="difficulty <= taskDifficulty && taskDifficulty === taskDifficulties.MEDIUM"
+         [class.hard]="difficulty <= taskDifficulty && taskDifficulty === taskDifficulties.HARD"
+    ></div>
+</div>

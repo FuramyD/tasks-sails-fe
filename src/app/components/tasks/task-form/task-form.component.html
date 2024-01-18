@@ -1,0 +1,77 @@
+<form class="task-from" [formGroup]="taskForm" (ngSubmit)="onFormSubmit()">
+    <div class="tui-form__row">
+        <tui-input formControlName="title">
+            Title
+            <input type="text" tuiTextfield>
+        </tui-input>
+        <tui-error
+                formControlName="title"
+                [error]="[] | tuiFieldError | async"
+        ></tui-error>
+    </div>
+    <div class="tui-form__row">
+        <tui-input formControlName="description">
+            Description
+            <textarea rows="4" tuiTextfield></textarea>
+        </tui-input>
+        <tui-error
+                formControlName="description"
+                [error]="[] | tuiFieldError | async"
+        ></tui-error>
+    </div>
+    <div class="tui-form__row">
+        <tui-input-date-time formControlName="dueDate" [min]="now" >
+            Due Date
+        </tui-input-date-time>
+        <tui-error
+                formControlName="dueDate"
+                [error]="[] | tuiFieldError | async"
+        ></tui-error>
+    </div>
+    <div class="tui-form__row">
+        <tui-select formControlName="difficulty" [valueContent]="difficultyTemplate">
+            Difficulty
+            <tui-data-list-wrapper
+                    *tuiDataList
+                    [itemContent]="difficultyTemplate"
+                    [items]="Difficulty"
+            ></tui-data-list-wrapper>
+        </tui-select>
+        <tui-error
+                formControlName="difficulty"
+                [error]="[] | tuiFieldError | async"
+        ></tui-error>
+    </div>
+    <div class="tui-form__row">
+        <tui-combo-box
+                formControlName="assignee"
+                [stringify]="userStringify"
+                (searchChange)="onSearchUsers($event!)"
+        >
+            Assignee
+            <input type="text" placeholder="Type a name" tuiTextfield (input)="onSearchUsers(extractValueFromEvent($event)!)"/>
+            <tui-data-list-wrapper
+                    *tuiDataList
+                    [itemContent]="userStringify | tuiStringifyContent"
+                    [items]="users$ | async | tuiFilterByInputWith : userStringify"
+            ></tui-data-list-wrapper>
+        </tui-combo-box>
+        <tui-error
+                formControlName="assignee"
+                [error]="[] | tuiFieldError | async"
+        ></tui-error>
+    </div>
+    <div class="task-form__footer">
+        <button tuiButton type="submit">{{ task ? 'Edit' : 'Create' }}</button>
+        <button tuiButton type="button" appearance="secondary" (click)="cancel.emit()">Cancel</button>
+    </div>
+</form>
+
+<ng-template #difficultyTemplate let-difficult>
+    <ng-container [ngSwitch]="difficult">
+        <span class="difficult" *ngSwitchCase="1">Easy</span>
+        <span class="difficult" *ngSwitchCase="2">Medium</span>
+        <span class="difficult" *ngSwitchCase="3">Hard</span>
+    </ng-container>
+</ng-template>
+
