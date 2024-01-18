@@ -46,7 +46,7 @@ export const appConfig: ApplicationConfig = {
         provideDateTimeValueTransformer(IsoStringDateTimeValueTransformer),
         {
             provide: BACKEND_URL,
-            useValue: "http://localhost:1337",
+            useValue: "https://tasks-management-sails-service.onrender.com",
         },
     ]
 };
